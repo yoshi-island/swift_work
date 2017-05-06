@@ -157,6 +157,7 @@ class TableViewController: UITableViewController {
         print(TableList[indexPath.row])
         result = TableList[indexPath.row]
         resultimg = ImageList[indexPath.row]
+        indexno = indexPath.row
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
