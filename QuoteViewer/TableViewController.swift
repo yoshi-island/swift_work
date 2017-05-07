@@ -10,15 +10,13 @@ import UIKit
 class TableViewController: UITableViewController {
     
     // set variables
-    let TableList = ["Nobunaga", "Hideyoshi", "Ieyasu"]
-    let TableListDetail = ["Koroshiteshimae", "Nakasetemiseyou", "Nakumadematou"]
-    let ImageList = [ "img1", "img2", "img3"]
+    var dataListFormat = [["名前", "画像", "ラベル", "内容"]]
     
     var indexno = 0
-    var result : String?
-    var resultimg : String?    
-    let quoteLabel = "test"
-    
+    var nameSV : String?
+    var imgSV : String?
+    var labelSV : String?
+    var labeldetailSV : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +31,24 @@ class TableViewController: UITableViewController {
         
         print("func viewDidLoad loaded")
         
-
         
+        // get csv file path
+        let csvPath = Bundle.main.path(forResource: "QuoteList", ofType: "csv")
+        print("csvPath is " + csvPath!)
+        // get csv data
+        let csvData = try? NSString(contentsOfFile: csvPath!, encoding: String.Encoding.utf8.rawValue)
+        // format scv data
+        let dataList = csvData?.components(separatedBy: "\n")
+        print(dataList ?? "default data")
+
+        for line in dataList! {
+            let l = line.components(separatedBy: ",")
+            print(l)
+            dataListFormat.append(l)
+        }
+        dataListFormat.removeFirst()
+        dataListFormat.removeLast()
+        print(dataListFormat)
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +73,7 @@ class TableViewController: UITableViewController {
         
         print("func tableView numberOfRowsInSection loaded")
         
-        return self.TableList.count
+        return self.dataListFormat.count
     }
 
     /*
@@ -76,7 +90,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
         
-    let img = UIImage(named:"\(ImageList[indexPath.row])")
+    let img = UIImage(named:"\(dataListFormat[indexPath.row][1])")
      
      // Configure the cell...
         
@@ -84,14 +98,13 @@ class TableViewController: UITableViewController {
         imageView.image = img
         
         let label1 = tableView.viewWithTag(2) as! UILabel
-        label1.text = "\(TableList[indexPath.row])"
+        label1.text = "\(dataListFormat[indexPath.row][0])"
         
         let label2 = tableView.viewWithTag(3) as! UILabel
-        label2.text = "\(TableListDetail[indexPath.row])"
+        label2.text = "\(dataListFormat[indexPath.row][2])"
         
         let c = "\(indexPath.row)"
         print(c)
-        
         
         //cell.textLabel?.text = self.TableList[indexPath.row]
         
@@ -154,9 +167,11 @@ class TableViewController: UITableViewController {
         
         print("func tableView didHighlightRowAt loaded")
         
-        print(TableList[indexPath.row])
-        result = TableList[indexPath.row]
-        resultimg = ImageList[indexPath.row]
+        print(dataListFormat[indexPath.row])
+        nameSV = dataListFormat[indexPath.row][0]
+        imgSV = dataListFormat[indexPath.row][1]
+        labelSV = dataListFormat[indexPath.row][2]
+        labeldetailSV = dataListFormat[indexPath.row][3]
         indexno = indexPath.row
     }
     
@@ -171,15 +186,14 @@ class TableViewController: UITableViewController {
         if segue.identifier == "toTableSubView" {
 
             print("func prepare loaded")
-            print("result is " + result!)
-            print("result image is " + resultimg!)
             
+            // pass var to SubView
             let TableSV = segue.destination as! TableSubView
             TableSV.indexno = self.indexno
-            TableSV.quoteLabel = self.result
-            TableSV.quoteImage = self.resultimg
-    
-            
+            TableSV.nameSV = self.nameSV
+            TableSV.imgSV = self.imgSV
+            TableSV.labelSV = self.labelSV
+            TableSV.labeldetailSV = self.labeldetailSV
             
         }
     }

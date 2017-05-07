@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E6BC2801EBF152F008CF017 /* QuoteList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8E6BC27F1EBF152F008CF017 /* QuoteList.csv */; };
 		8EF55C0F1EBC0CCC002CCA27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF55C0E1EBC0CCC002CCA27 /* AppDelegate.swift */; };
 		8EF55C111EBC0CCC002CCA27 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF55C101EBC0CCC002CCA27 /* ViewController.swift */; };
 		8EF55C141EBC0CCC002CCA27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF55C121EBC0CCC002CCA27 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E6BC27F1EBF152F008CF017 /* QuoteList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QuoteList.csv; sourceTree = "<group>"; };
 		8EF55C0B1EBC0CCC002CCA27 /* QuoteViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuoteViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF55C0E1EBC0CCC002CCA27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EF55C101EBC0CCC002CCA27 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				8EF55C341EBC6208002CCA27 /* TableSubView.swift */,
 				8EF55C301EBC0F6F002CCA27 /* TableViewCell.swift */,
 				8EF55C2E1EBC0E39002CCA27 /* TableViewController.swift */,
+				8E6BC27F1EBF152F008CF017 /* QuoteList.csv */,
 				8EF55C151EBC0CCC002CCA27 /* Assets.xcassets */,
 				8EF55C171EBC0CCC002CCA27 /* LaunchScreen.storyboard */,
 				8EF55C1A1EBC0CCC002CCA27 /* Info.plist */,
@@ -191,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EF55C191EBC0CCC002CCA27 /* LaunchScreen.storyboard in Resources */,
+				8E6BC2801EBF152F008CF017 /* QuoteList.csv in Resources */,
 				8EF55C161EBC0CCC002CCA27 /* Assets.xcassets in Resources */,
 				8EF55C141EBC0CCC002CCA27 /* Main.storyboard in Resources */,
 			);
@@ -424,6 +428,7 @@
 				8EF55C2A1EBC0CCC002CCA27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8EF55C2B1EBC0CCC002CCA27 /* Build configuration list for PBXNativeTarget "QuoteViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +437,7 @@
 				8EF55C2D1EBC0CCC002CCA27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

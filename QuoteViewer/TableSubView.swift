@@ -14,11 +14,10 @@ class TableSubView: UIViewController {
     
     // varialble to get valut from previous
     var indexno = 0
-    var quoteLabel : String?
-    var quoteImage : String?
-    
-    
-    let SubViewDetail = [ "殺してしまえホトトギス", "鳴かせてみせようホトトギス", "鳴くまで待とうホトトギス"]
+    var nameSV : String?
+    var imgSV : String?
+    var labelSV : String?
+    var labeldetailSV : String?
     
     
     @IBOutlet weak var LabelSubView: UILabel!
@@ -31,9 +30,9 @@ class TableSubView: UIViewController {
         
         print("func viewDidLoad loaded")
         
-        LabelSubView.text = quoteLabel
-        ImageSubView.image = UIImage(named: quoteImage!)
-        LabelSubViewDetail.text = SubViewDetail[indexno]
+        LabelSubView.text = nameSV
+        ImageSubView.image = UIImage(named: imgSV!)
+        LabelSubViewDetail.text = labeldetailSV
         
     }
     
