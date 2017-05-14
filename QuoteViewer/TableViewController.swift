@@ -35,20 +35,23 @@ class TableViewController: UITableViewController {
         // get csv file path
         let csvPath = Bundle.main.path(forResource: "QuoteList", ofType: "csv")
         print("csvPath is " + csvPath!)
+        
         // get csv data
         let csvData = try? NSString(contentsOfFile: csvPath!, encoding: String.Encoding.utf8.rawValue)
+        
         // format scv data
         let dataList = csvData?.components(separatedBy: "\n")
         print(dataList ?? "default data")
-
         for line in dataList! {
             let l = line.components(separatedBy: ",")
             print(l)
             dataListFormat.append(l)
         }
+        
         dataListFormat.removeFirst()
         dataListFormat.removeLast()
         print(dataListFormat)
+        
     }
     
 
@@ -66,6 +69,7 @@ class TableViewController: UITableViewController {
         
         print("func numberOfSections loaded")
         
+        // get section list // fixme: duplicated function
         var section_list = ["default"]
         for line in dataListFormat {
             print(line[4])
@@ -91,7 +95,28 @@ class TableViewController: UITableViewController {
     
     // set title to section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section \(section)"
+        print("dataListFormat is ",dataListFormat)
+        print("section is", section)
+        
+        // get section list  // fixme: duplicated function
+        var section_list = ["default"]
+        for line in dataListFormat {
+            print(line[4])
+            section_list.append(line[4])
+        }
+        var section_list_format = Set(section_list)
+        section_list_format.removeFirst()
+        print(section_list_format) // removed duplicated
+        print("section_list_format is ", section_list_format)
+        
+        // convert to array
+        let section_list_array = Array(section_list_format)
+        
+        let section_title = section_list_array
+        print("section_title is ", section_title)
+        return section_title[section]
+        //return "Section \(section)"
+
     }
     
     /*
