@@ -72,10 +72,9 @@ class TableViewController: UITableViewController {
         // get section list // fixme: duplicated function
         var section_list = ["default"]
         for line in dataListFormat {
-            print(line[4])
             section_list.append(line[4])
         }
-        var section_list_format = Set(section_list)
+        var section_list_format = Set(section_list) // removed duplicated
         section_list_format.removeFirst()
         print(section_list_format) // removed duplicated
         
@@ -89,7 +88,58 @@ class TableViewController: UITableViewController {
         
         print("func tableView numberOfRowsInSection loaded")
         
-        return self.dataListFormat.count
+        
+        // get section list  // fixme: duplicated function
+        var section_list = ["default"]
+        for line in dataListFormat {
+            section_list.append(line[4])
+        }
+        var section_list_format = Set(section_list) // removed duplicated
+        section_list_format.removeFirst()
+        print("section_list_format is ", section_list_format)
+        
+        // convert to array
+        let section_list_array = Array(section_list_format)
+        
+        
+        var c = 0
+        // return section number //fixme to loop
+        if section == 0{
+            for l in dataListFormat{
+                if l[4] == section_list_array[0]{
+                    c += 1
+                }
+            }
+            print("sec_no is 0")
+            print("c is", c)
+            return c
+        }
+        else if section == 1{
+            for l in dataListFormat{
+                if l[4] == section_list_array[1]{
+                    c += 1
+                }
+            }
+            print("sec_no is 1")
+            print("c is", c)
+            return c
+
+        }
+        else if section == 2{
+            for l in dataListFormat{
+                if l[4] == section_list_array[2]{
+                    c += 1
+                }
+            }
+            print("sec_no is 1")
+            print("c is", c)
+            return c
+            
+        }
+        else{
+            return self.dataListFormat.count
+        }
+        
     }
     
     
@@ -101,10 +151,9 @@ class TableViewController: UITableViewController {
         // get section list  // fixme: duplicated function
         var section_list = ["default"]
         for line in dataListFormat {
-            print(line[4])
             section_list.append(line[4])
         }
-        var section_list_format = Set(section_list)
+        var section_list_format = Set(section_list) // removed duplicated
         section_list_format.removeFirst()
         print(section_list_format) // removed duplicated
         print("section_list_format is ", section_list_format)
@@ -129,17 +178,97 @@ class TableViewController: UITableViewController {
     }
     */
     
+
+    //if dataListFormat[indexPath.row][4] == section_list_array[0]{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
         
-    let img = UIImage(named:"\(dataListFormat[indexPath.row][1])")
-    print("func tableView cellForRowAt is loaded")
+        let img = UIImage(named:"\(dataListFormat[indexPath.row][1])")
+        print("func tableView cellForRowAt is loaded")
         
+        
+        // get section list  // fixme: duplicated function
+        var section_list = ["default"] // fixme to get empty list
+        for line in dataListFormat {
+            section_list.append(line[4])
+        }
+        var section_list_format = Set(section_list) // removed duplicated
+        section_list_format.removeFirst() // fixme
+        print("section_list_format is ", section_list_format)
+        
+        // convert to array
+        var section_list_array = Array(section_list_format)
+        print("section_list_array is ", section_list_array)
+        
+        // get section and data list // fixme 
+        var datalist_0 = ["default"] // fixme to get empty list
+        var datalist_1 = ["default"] // fixme to get empty list
+        var datalist_2 = ["default"] // fixme to get empty list
+        print(type(of: dataListFormat[0][4]))
+        print(dataListFormat[0][4])
+        print(type(of: section_list_array[0]))
+        print(section_list_array[0])
+        
+        
+        
+        //★
+        /*
+        var n = 0
+        while n <= dataListFormat.count{
+            if section_list_array[0] = dataListFormat[n][4]{
+                datalist_0.append(String(n))
+            }
+            else if section_list_array[1] = dataListFormat[n][4]{
+                datalist_1.append(String(n))
+            }
+            else if section_list_array[2] = dataListFormat[n][4]{
+                datalist_2.append(String(n))
+            }
+            n += 1
+        }
+ */
+        
+ 
+        
+        datalist_0.removeFirst()
+        datalist_1.removeFirst()
+        datalist_2.removeFirst()
+        print("datalist_0 is ",datalist_0)
+        print("datalist_1 is ",datalist_1)
+        print("datalist_2 is ",datalist_2)
+        
+        // put data in cell
+        if indexPath.section == 0 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = img
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(dataListFormat[indexPath.row][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(dataListFormat[indexPath.row][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else{
+            return cell
+        }
+    }
+    
+
+        
+        // Configure the cell...
+        
+        /*
         switch(indexPath.section) {
         case 0:
-            // Configure the cell...
             
             print("func tableView cellForRowAt case 0 loaded")
+            print("dataListFormat[indexPath.row][4] is ", dataListFormat[indexPath.row][4])
+            print("section_list_array[0] is ", section_list_array[0])
             
             let imageView = tableView.viewWithTag(1) as! UIImageView
             imageView.image = img
@@ -154,7 +283,7 @@ class TableViewController: UITableViewController {
             print(c)
             
             return cell
-        
+            
  
         case 1:
             
@@ -174,6 +303,7 @@ class TableViewController: UITableViewController {
             
             return cell
             
+            
         default:
             
             print("func tableView cellForRowAt default loaded")
@@ -190,16 +320,14 @@ class TableViewController: UITableViewController {
             let c = "\(indexPath.row)"
             print(c)
         
-            
             return cell
             
         }
- 
-            
-        //cell.textLabel?.text = self.TableList[indexPath.row]
-
+        */
         
-     }
+        //cell.textLabel?.text = self.TableList[indexPath.row]
+    
+    //}
 
     
     
