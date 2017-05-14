@@ -50,12 +50,14 @@ class TableViewController: UITableViewController {
         dataListFormat.removeLast()
         print(dataListFormat)
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,8 +66,18 @@ class TableViewController: UITableViewController {
         
         print("func numberOfSections loaded")
         
-        return 3
+        var section_list = ["default"]
+        for line in dataListFormat {
+            print(line[4])
+            section_list.append(line[4])
+        }
+        var section_list_format = Set(section_list)
+        section_list_format.removeFirst()
+        print(section_list_format) // removed duplicated
+        
+        return section_list_format.count
     }
+    
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
