@@ -229,14 +229,15 @@ class TableViewController: UITableViewController {
     */
     
 
-    //if dataListFormat[indexPath.row][4] == section_list_array[0]{
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
         
-        let img = UIImage(named:"\(dataListFormat[indexPath.row][1])")
         print("func tableView cellForRowAt is loaded")
+
+        // Configure the cell...
         
-        
+        /*
         // get section list  // fixme: duplicated function
         var section_list = ["default"] // fixme to get empty list
         for line in dataListFormat {
@@ -266,15 +267,23 @@ class TableViewController: UITableViewController {
         print("datalist_0 is ",datalist_0)
         print("datalist_1 is ",datalist_1)
         print("datalist_2 is ",datalist_2)
-
+        */
+        
+        let get_lists_result = get_lists()
+        let section_lists_format = get_lists_result.0 as? [[[String]]]
+        let number_of_rows = get_lists_result.1
+        let section_list_array = get_lists_result.2
+        print("section_lists_format[0][1] is ",section_lists_format?[0][1])
+        print("indexPath.row is ",indexPath.row)
         
         // put data in cell
         if indexPath.section == 0 {
             let imageView = tableView.viewWithTag(1) as! UIImageView
-            imageView.image = img
+            imageView.image = UIImage(named:"\(dataListFormat[indexPath.row][1])")
+            //imageView.image = UIImage(named:"\(section_lists_format?[0][indexPath.row + 1][1])")
             
             let label1 = tableView.viewWithTag(2) as! UILabel
-            label1.text = "\(dataListFormat[indexPath.row][0])"
+            label1.text = "\(section_lists_format?[0][indexPath.row + 1][0])"
             
             let label2 = tableView.viewWithTag(3) as! UILabel
             label2.text = "\(dataListFormat[indexPath.row][2])"
@@ -286,7 +295,7 @@ class TableViewController: UITableViewController {
         }
         else if indexPath.section == 1 {
             let imageView = tableView.viewWithTag(1) as! UIImageView
-            imageView.image = img
+            imageView.image = UIImage(named:"\(dataListFormat[indexPath.row][1])")
             
             let label1 = tableView.viewWithTag(2) as! UILabel
             label1.text = "\(dataListFormat[indexPath.row][0])"
@@ -300,78 +309,12 @@ class TableViewController: UITableViewController {
             return cell
         }
         return cell
-    }
-    
-
-        
-        // Configure the cell...
-        
-        /*
-        switch(indexPath.section) {
-        case 0:
-            
-            print("func tableView cellForRowAt case 0 loaded")
-            print("dataListFormat[indexPath.row][4] is ", dataListFormat[indexPath.row][4])
-            print("section_list_array[0] is ", section_list_array[0])
-            
-            let imageView = tableView.viewWithTag(1) as! UIImageView
-            imageView.image = img
-            
-            let label1 = tableView.viewWithTag(2) as! UILabel
-            label1.text = "\(dataListFormat[indexPath.row][0])"
-            
-            let label2 = tableView.viewWithTag(3) as! UILabel
-            label2.text = "\(dataListFormat[indexPath.row][2])"
-            
-            let c = "\(indexPath.row)"
-            print(c)
-            
-            return cell
-            
- 
-        case 1:
-            
-            print("func tableView cellForRowAt case 1 loaded")
-
-            let imageView = tableView.viewWithTag(1) as! UIImageView
-            imageView.image = img
-            
-            let label1 = tableView.viewWithTag(2) as! UILabel
-            label1.text = "hogehoge"
-            
-            let label2 = tableView.viewWithTag(3) as! UILabel
-            label2.text = "hogehoge"
-            
-            let c = "\(indexPath.row)"
-            print(c)
-            
-            return cell
-            
-            
-        default:
-            
-            print("func tableView cellForRowAt default loaded")
-
-            let imageView = tableView.viewWithTag(1) as! UIImageView
-            imageView.image = img
-            
-            let label1 = tableView.viewWithTag(2) as! UILabel
-            label1.text = "hoge"
-            
-            let label2 = tableView.viewWithTag(3) as! UILabel
-            label2.text = "hoge"
-            
-            let c = "\(indexPath.row)"
-            print(c)
-        
-            return cell
-            
-        }
-        */
         
         //cell.textLabel?.text = self.TableList[indexPath.row]
-    
-    //}
+    }
+        
+
+
 
     
     
