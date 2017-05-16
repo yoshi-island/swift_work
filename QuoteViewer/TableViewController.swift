@@ -17,7 +17,69 @@ class TableViewController: UITableViewController {
     var imgSV : String?
     var labelSV : String?
     var labeldetailSV : String?
+    
+    
+    func get_lists() -> (Array<Any>, Array<Any>, Array<Any>){
 
+        // get section list  // fixme: duplicated function
+        var section_list = ["default"]
+        for line in dataListFormat {
+            section_list.append(line[4])
+        }
+        var section_list_format = Set(section_list) // removed duplicated
+        section_list_format.removeFirst()
+        let section_list_array = Array(section_list_format) // convert to array
+        print("section_list_array is ",section_list_array)
+        
+        // devide dataListFormat by section(4th field)
+        // fixme: seems swift cannot generate lists for each sections. then, generate bigger number of lists and remove lists if it's to be unused -> max section number is 10!!
+        let section_list1 = [["","","","",""]]
+        let section_list2 = [["","","","",""]]
+        let section_list3 = [["","","","",""]]
+        let section_list4 = [["","","","",""]]
+        let section_list5 = [["","","","",""]]
+        let section_list6 = [["","","","",""]]
+        let section_list7 = [["","","","",""]]
+        let section_list8 = [["","","","",""]]
+        let section_list9 = [["","","","",""]]
+        let section_list10 = [["","","","",""]]
+        var section_lists = [section_list1,section_list2,section_list3,section_list4,section_list5,section_list6,section_list7,section_list8,section_list9,section_list10]
+        // set lists for each sections
+        var n1 = 0
+        for line in section_list_array{
+            section_lists[n1].append(["","","","",line])
+            section_lists[n1].removeFirst()
+            n1 = n1 + 1
+        }
+        var section_lists_format = Array(section_lists[0..<section_list_array.count])
+        // for mat section lists
+        for line1 in dataListFormat {
+            var n2 = 0
+            for line2 in section_lists_format {
+                if line1[4] == line2[0][4]{
+                    section_lists_format[n2].append(line1)
+                }
+                n2 += 1
+            }
+        }
+        print("section_lists_format is ",section_lists_format)
+        
+        // get number of rows in section
+        var n3 = 0
+        var number_of_rows = [0]
+        for _ in section_lists_format {
+            number_of_rows.append(section_lists_format[n3].count - 1)
+            n3 += 1
+        }
+        number_of_rows.removeFirst()
+        print("number_of_rows is ",number_of_rows)
+        
+        return (section_lists_format, number_of_rows, section_list_array)
+        // section_lists_format is  [[["", "", "", "", "sec1"], ["織田信長", "img1", "鳴かぬなら", "鳴かぬなら殺してしまえホトトギス", "sec1"], ["豊臣秀吉", "img2", "鳴かぬなら", "鳴かぬなら鳴かせてみせようホトトギス", "sec1"]], [["", "", "", "", "sec2"], ["徳川家康", "img3", "鳴かぬなら", "鳴かぬなら鳴くまで待とうホトトギス", "sec2"], ["デカルト", "img4", "我思う", "我思うゆえに我あり", "sec2"], ["アリストテレス", "img5", "我々の性格は", "我々の性格は我々の行動の結果なり", "sec2"]], [["", "", "", "", "sec3"], ["プラトン", "img6", "自分に打ち勝つことが", "自分に打ち勝つことが最も偉大な勝利なり", "sec3"]]]
+        // number_of_rows is  [2, 3, 1]
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +93,6 @@ class TableViewController: UITableViewController {
         
         print("func viewDidLoad loaded")
         
-        
         // get csv file path
         let csvPath = Bundle.main.path(forResource: "QuoteList", ofType: "csv")
         print("csvPath is " + csvPath!)
@@ -41,16 +102,14 @@ class TableViewController: UITableViewController {
         
         // format scv data
         let dataList = csvData?.components(separatedBy: "\n")
-        print(dataList ?? "default data")
+        //print(dataList ?? "default data")
         for line in dataList! {
             let l = line.components(separatedBy: ",")
-            print(l)
             dataListFormat.append(l)
         }
-        
-        dataListFormat.removeFirst()
-        dataListFormat.removeLast()
-        print(dataListFormat)
+        dataListFormat.removeFirst() // remove label object // fixme
+        dataListFormat.removeLast() // remove blank object // fixme
+        print("dataListFormat is ",dataListFormat)
         
     }
     
@@ -69,16 +128,11 @@ class TableViewController: UITableViewController {
         
         print("func numberOfSections loaded")
         
-        // get section list // fixme: duplicated function
-        var section_list = ["default"]
-        for line in dataListFormat {
-            section_list.append(line[4])
-        }
-        var section_list_format = Set(section_list) // removed duplicated
-        section_list_format.removeFirst()
-        print(section_list_format) // removed duplicated
+        let section_lists_format = get_lists()
+        let number_of_sections = section_lists_format.0.count - 1 + 1
+        print("number_of_sections is ", number_of_sections)
         
-        return section_list_format.count
+        return number_of_sections
     }
     
 
@@ -88,57 +142,36 @@ class TableViewController: UITableViewController {
         
         print("func tableView numberOfRowsInSection loaded")
         
+        var number_of_rows = get_lists().1
         
-        // get section list  // fixme: duplicated function
-        var section_list = ["default"]
-        for line in dataListFormat {
-            section_list.append(line[4])
+        // fixme: max section number is 10!
+        switch section{
+        case 0:
+            return number_of_rows[0] as! Int
+        case 1:
+            return number_of_rows[1] as! Int
+        case 2:
+            return number_of_rows[2] as! Int
+        case 3:
+            return number_of_rows[3] as! Int
+        case 4:
+            return number_of_rows[4] as! Int
+        case 5:
+            return number_of_rows[5] as! Int
+        case 6:
+            return number_of_rows[6] as! Int
+        case 7:
+            return number_of_rows[7] as! Int
+        case 8:
+            return number_of_rows[8] as! Int
+        case 9:
+            return number_of_rows[9] as! Int
+        case 10:
+            return number_of_rows[10] as! Int
+        default:
+            return 0
         }
-        var section_list_format = Set(section_list) // removed duplicated
-        section_list_format.removeFirst()
-        print("section_list_format is ", section_list_format)
-        
-        // convert to array
-        let section_list_array = Array(section_list_format)
-        
-        
-        var c = 0
-        // return section number //fixme to loop
-        if section == 0{
-            for l in dataListFormat{
-                if l[4] == section_list_array[0]{
-                    c += 1
-                }
-            }
-            print("sec_no is 0")
-            print("c is", c)
-            return c
-        }
-        else if section == 1{
-            for l in dataListFormat{
-                if l[4] == section_list_array[1]{
-                    c += 1
-                }
-            }
-            print("sec_no is 1")
-            print("c is", c)
-            return c
-
-        }
-        else if section == 2{
-            for l in dataListFormat{
-                if l[4] == section_list_array[2]{
-                    c += 1
-                }
-            }
-            print("sec_no is 1")
-            print("c is", c)
-            return c
-            
-        }
-        else{
-            return self.dataListFormat.count
-        }
+ 
         
     }
     
@@ -146,25 +179,42 @@ class TableViewController: UITableViewController {
     // set title to section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         print("dataListFormat is ",dataListFormat)
-        print("section is", section)
         
-        // get section list  // fixme: duplicated function
-        var section_list = ["default"]
-        for line in dataListFormat {
-            section_list.append(line[4])
+        
+        /*
+        var section_list_array = get_lists().2
+        
+        
+        // fixme: max section number is 10!
+        switch section{
+        case 0:
+            return section_list_array[0]
+        case 1:
+            return section_list_array[1]
+        case 2:
+            return section_list_array[2]
+        case 3:
+            return section_list_array[3]
+        case 4:
+            return section_list_array[4]
+        case 5:
+            return section_list_array[5] as! Int
+        case 6:
+            return section_list_array[6] as! Int
+        case 7:
+            return section_list_array[7] as! Int
+        case 8:
+            return section_list_array[8] as! Int
+        case 9:
+            return section_list_array[9] as! Int
+        case 10:
+            return section_list_array[10] as! Int
+        default:
+            return 0
         }
-        var section_list_format = Set(section_list) // removed duplicated
-        section_list_format.removeFirst()
-        print(section_list_format) // removed duplicated
-        print("section_list_format is ", section_list_format)
+ */
         
-        // convert to array
-        let section_list_array = Array(section_list_format)
-        
-        let section_title = section_list_array
-        print("section_title is ", section_title)
-        return section_title[section]
-        //return "Section \(section)"
+        return "Section \(section)"
 
     }
     
@@ -204,38 +254,19 @@ class TableViewController: UITableViewController {
         var datalist_0 = ["default"] // fixme to get empty list
         var datalist_1 = ["default"] // fixme to get empty list
         var datalist_2 = ["default"] // fixme to get empty list
+        datalist_0.removeFirst()
+        datalist_1.removeFirst()
+        datalist_2.removeFirst()
+
         print(type(of: dataListFormat[0][4]))
         print(dataListFormat[0][4])
         print(type(of: section_list_array[0]))
         print(section_list_array[0])
         
-        
-        
-        //★
-        /*
-        var n = 0
-        while n <= dataListFormat.count{
-            if section_list_array[0] = dataListFormat[n][4]{
-                datalist_0.append(String(n))
-            }
-            else if section_list_array[1] = dataListFormat[n][4]{
-                datalist_1.append(String(n))
-            }
-            else if section_list_array[2] = dataListFormat[n][4]{
-                datalist_2.append(String(n))
-            }
-            n += 1
-        }
- */
-        
- 
-        
-        datalist_0.removeFirst()
-        datalist_1.removeFirst()
-        datalist_2.removeFirst()
         print("datalist_0 is ",datalist_0)
         print("datalist_1 is ",datalist_1)
         print("datalist_2 is ",datalist_2)
+
         
         // put data in cell
         if indexPath.section == 0 {
@@ -253,9 +284,22 @@ class TableViewController: UITableViewController {
             
             return cell
         }
-        else{
+        else if indexPath.section == 1 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = img
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(dataListFormat[indexPath.row][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(dataListFormat[indexPath.row][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
             return cell
         }
+        return cell
     }
     
 
