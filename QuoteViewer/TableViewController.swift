@@ -181,40 +181,38 @@ class TableViewController: UITableViewController {
         print("dataListFormat is ",dataListFormat)
         
         
-        /*
+        
         var section_list_array = get_lists().2
         
         
         // fixme: max section number is 10!
         switch section{
         case 0:
-            return section_list_array[0]
+            return section_list_array[0] as? String
         case 1:
-            return section_list_array[1]
+            return section_list_array[1] as? String
         case 2:
-            return section_list_array[2]
+            return section_list_array[2] as? String
         case 3:
-            return section_list_array[3]
+            return section_list_array[3] as? String
         case 4:
-            return section_list_array[4]
+            return section_list_array[4] as? String
         case 5:
-            return section_list_array[5] as! Int
+            return section_list_array[5] as? String
         case 6:
-            return section_list_array[6] as! Int
+            return section_list_array[6] as? String
         case 7:
-            return section_list_array[7] as! Int
+            return section_list_array[7] as? String
         case 8:
-            return section_list_array[8] as! Int
+            return section_list_array[8] as? String
         case 9:
-            return section_list_array[9] as! Int
+            return section_list_array[9] as? String
         case 10:
-            return section_list_array[10] as! Int
+            return section_list_array[10] as? String
         default:
-            return 0
+            return "Section \(section)"
         }
- */
-        
-        return "Section \(section)"
+ 
 
     }
     
@@ -273,20 +271,22 @@ class TableViewController: UITableViewController {
         let section_lists_format = get_lists_result.0 as? [[[String]]]
         let number_of_rows = get_lists_result.1
         let section_list_array = get_lists_result.2
-        print("section_lists_format[0][1] is ",section_lists_format?[0][1])
         print("indexPath.row is ",indexPath.row)
+        print("dataListFormat is ", dataListFormat)
         
-        // put data in cell
+        // put data in cell // fixme max 10 sections
         if indexPath.section == 0 {
+            
+            print("section_lists_format?[0][indexPath.row + 1][1] is ",section_lists_format?[0][indexPath.row + 1][1] ?? "DefaultImage")
+            
             let imageView = tableView.viewWithTag(1) as! UIImageView
-            imageView.image = UIImage(named:"\(dataListFormat[indexPath.row][1])")
-            //imageView.image = UIImage(named:"\(section_lists_format?[0][indexPath.row + 1][1])")
+            imageView.image = UIImage(named:"\(section_lists_format![0][indexPath.row + 1][1])")
             
             let label1 = tableView.viewWithTag(2) as! UILabel
-            label1.text = "\(section_lists_format?[0][indexPath.row + 1][0])"
+            label1.text = "\(section_lists_format![0][indexPath.row + 1][0])"
             
             let label2 = tableView.viewWithTag(3) as! UILabel
-            label2.text = "\(dataListFormat[indexPath.row][2])"
+            label2.text = "\(section_lists_format![0][indexPath.row + 1][2])"
             
             let c = "\(indexPath.row)"
             print(c)
@@ -295,27 +295,143 @@ class TableViewController: UITableViewController {
         }
         else if indexPath.section == 1 {
             let imageView = tableView.viewWithTag(1) as! UIImageView
-            imageView.image = UIImage(named:"\(dataListFormat[indexPath.row][1])")
+            imageView.image = UIImage(named:"\(section_lists_format![1][indexPath.row + 1][1])")
             
             let label1 = tableView.viewWithTag(2) as! UILabel
-            label1.text = "\(dataListFormat[indexPath.row][0])"
+            label1.text = "\(section_lists_format![1][indexPath.row + 1][0])"
             
             let label2 = tableView.viewWithTag(3) as! UILabel
-            label2.text = "\(dataListFormat[indexPath.row][2])"
+            label2.text = "\(section_lists_format![1][indexPath.row + 1][2])"
             
             let c = "\(indexPath.row)"
             print(c)
             
             return cell
         }
+        else if indexPath.section == 2 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![2][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![2][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![2][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else if indexPath.section == 3 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![3][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![3][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![3][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else if indexPath.section == 4 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![4][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![4][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![4][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else if indexPath.section == 5 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![5][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![5][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![5][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else if indexPath.section == 6 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![6][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![6][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![6][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else if indexPath.section == 7 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![7][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![7][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![7][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else if indexPath.section == 8 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![8][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![8][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![8][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+        else if indexPath.section == 9 {
+            let imageView = tableView.viewWithTag(1) as! UIImageView
+            imageView.image = UIImage(named:"\(section_lists_format![9][indexPath.row + 1][1])")
+            
+            let label1 = tableView.viewWithTag(2) as! UILabel
+            label1.text = "\(section_lists_format![9][indexPath.row + 1][0])"
+            
+            let label2 = tableView.viewWithTag(3) as! UILabel
+            label2.text = "\(section_lists_format![9][indexPath.row + 1][2])"
+            
+            let c = "\(indexPath.row)"
+            print(c)
+            
+            return cell
+        }
+
         return cell
-        
-        //cell.textLabel?.text = self.TableList[indexPath.row]
+
     }
-        
-
-
-
     
     
     
