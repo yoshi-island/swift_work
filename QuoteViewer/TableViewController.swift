@@ -180,8 +180,6 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         print("dataListFormat is ",dataListFormat)
         
-        
-        
         var section_list_array = get_lists().2
         
         
@@ -213,7 +211,6 @@ class TableViewController: UITableViewController {
             return "Section \(section)"
         }
  
-
     }
     
     /*
@@ -235,42 +232,8 @@ class TableViewController: UITableViewController {
 
         // Configure the cell...
         
-        /*
-        // get section list  // fixme: duplicated function
-        var section_list = ["default"] // fixme to get empty list
-        for line in dataListFormat {
-            section_list.append(line[4])
-        }
-        var section_list_format = Set(section_list) // removed duplicated
-        section_list_format.removeFirst() // fixme
-        print("section_list_format is ", section_list_format)
-        
-        // convert to array
-        var section_list_array = Array(section_list_format)
-        print("section_list_array is ", section_list_array)
-        
-        // get section and data list // fixme 
-        var datalist_0 = ["default"] // fixme to get empty list
-        var datalist_1 = ["default"] // fixme to get empty list
-        var datalist_2 = ["default"] // fixme to get empty list
-        datalist_0.removeFirst()
-        datalist_1.removeFirst()
-        datalist_2.removeFirst()
-
-        print(type(of: dataListFormat[0][4]))
-        print(dataListFormat[0][4])
-        print(type(of: section_list_array[0]))
-        print(section_list_array[0])
-        
-        print("datalist_0 is ",datalist_0)
-        print("datalist_1 is ",datalist_1)
-        print("datalist_2 is ",datalist_2)
-        */
-        
         let get_lists_result = get_lists()
         let section_lists_format = get_lists_result.0 as? [[[String]]]
-        let number_of_rows = get_lists_result.1
-        let section_list_array = get_lists_result.2
         print("indexPath.row is ",indexPath.row)
         print("dataListFormat is ", dataListFormat)
         
@@ -488,12 +451,81 @@ class TableViewController: UITableViewController {
         
         print("func tableView didHighlightRowAt loaded")
         
-        print(dataListFormat[indexPath.row])
-        nameSV = dataListFormat[indexPath.row][0]
-        imgSV = dataListFormat[indexPath.row][1]
-        labelSV = dataListFormat[indexPath.row][2]
-        labeldetailSV = dataListFormat[indexPath.row][3]
-        indexno = indexPath.row
+        // fixme duplicated
+        let get_lists_result = get_lists()
+        let section_lists_format = get_lists_result.0 as? [[[String]]]
+        
+        // fix me: max section is 10
+        if indexPath.section == 0 {
+            nameSV = "\(section_lists_format![0][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![0][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![0][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![0][indexPath.row + 1][3])"
+            indexno = indexPath.row
+
+        }else if indexPath.section == 1 {
+            nameSV = "\(section_lists_format![1][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![1][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![1][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![1][indexPath.row + 1][3])"
+            indexno = indexPath.row
+            
+        }else if indexPath.section == 2 {
+            nameSV = "\(section_lists_format![2][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![2][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![2][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![2][indexPath.row + 1][3])"
+            indexno = indexPath.row
+            
+        }else if indexPath.section == 3 {
+            nameSV = "\(section_lists_format![3][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![3][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![3][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![3][indexPath.row + 1][3])"
+            indexno = indexPath.row
+
+        }else if indexPath.section == 4 {
+            nameSV = "\(section_lists_format![4][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![4][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![4][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![4][indexPath.row + 1][3])"
+            indexno = indexPath.row
+
+        }else if indexPath.section == 5 {
+            nameSV = "\(section_lists_format![5][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![5][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![5][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![5][indexPath.row + 1][3])"
+            indexno = indexPath.row
+
+        }else if indexPath.section == 6 {
+            nameSV = "\(section_lists_format![6][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![6][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![6][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![6][indexPath.row + 1][3])"
+            indexno = indexPath.row
+
+        }else if indexPath.section == 7 {
+            nameSV = "\(section_lists_format![7][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![7][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![7][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![7][indexPath.row + 1][3])"
+            indexno = indexPath.row
+
+        }else if indexPath.section == 8 {
+            nameSV = "\(section_lists_format![8][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![8][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![8][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![8][indexPath.row + 1][3])"
+            indexno = indexPath.row
+
+        }else if indexPath.section == 9 {
+            nameSV = "\(section_lists_format![9][indexPath.row + 1][0])"
+            imgSV = "\(section_lists_format![9][indexPath.row + 1][1])"
+            labelSV = "\(section_lists_format![9][indexPath.row + 1][2])"
+            labeldetailSV = "\(section_lists_format![9][indexPath.row + 1][3])"
+            indexno = indexPath.row
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
@@ -515,9 +547,6 @@ class TableViewController: UITableViewController {
             TableSV.imgSV = self.imgSV
             TableSV.labelSV = self.labelSV
             TableSV.labeldetailSV = self.labeldetailSV
-            
         }
     }
-    
-    
 }
